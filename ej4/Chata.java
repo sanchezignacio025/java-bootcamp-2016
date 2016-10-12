@@ -7,7 +7,8 @@ public class Chata {
 		
 	}
 	
-	public void setModel (String string){ this.model = string;
+	public void setModel (String string){
+		this.model = string;
 		
 	}
 

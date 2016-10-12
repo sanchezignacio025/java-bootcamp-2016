@@ -1,5 +1,5 @@
 
-public abstract class Chatabuilder {
+public abstract class ChataBuilder {
      protected Chata chata;
      public Chata getChata(){
     	 return chata;

@@ -4,7 +4,8 @@ public class Muestra {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Version version = new Version ();
-		version.setChataBuilder(new Chevybuilder());
+		ChevyBuilder cb = new ChevyBuilder()
+		version.setChataBuilder(cb);
 		version.constructChata();
 		Chata chata = version.getChata();
 		System.out.println(chata.getModel());

@@ -1,15 +1,15 @@
 
 public class Version {
 	
-	private Chatabuilder chataBuilder;
+	private ChataBuilder chataBuilder;
 	
 	public void constructChata(){
 		
-		chataBuilder.crearChata ();
-		chataBuilder.buildModel ();
+		chataBuilder.crearChata();
+		chataBuilder.buildModel();
 	}
 	
-	public void setChataBuilder(Chatabuilder cb){
+	public void setChataBuilder(ChataBuilder cb){
 		chataBuilder = cb;
 	}
 	public Chata getChata() {
