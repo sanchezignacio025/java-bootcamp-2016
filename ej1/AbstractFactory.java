@@ -1,5 +1,5 @@
 
 public abstract class AbstractFactory {
-   abstract Cuadrado getCuadrado(String cuadrados);
+   abstract Square getSquare(String square);
    abstract Marcos getMarcos(String marcos) ;
 }

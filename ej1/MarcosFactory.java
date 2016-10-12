@@ -8,11 +8,11 @@ public class MarcosFactory extends AbstractFactory {
          return null;
       }		
       
-      if(marcosType.equalsIgnoreCase("CHICO")){
-         return new Chico();
+      if(marcosType.equalsIgnoreCase("SMALL")){
+         return new Small();
          
-      }else if(marcosType.equalsIgnoreCase("GRANDE")){
-         return new Grande();
+      }else if(marcosType.equalsIgnoreCase("BIG")){
+         return new Big();
          
       }
       
@@ -20,7 +20,7 @@ public class MarcosFactory extends AbstractFactory {
    }
    
    @Override
-   Cuadrado getCuadrado(String cuadrado) {
+   Square getSquare(String square) {
       return null;
    }
 }

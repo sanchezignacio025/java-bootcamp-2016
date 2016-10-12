@@ -5,8 +5,8 @@ public class FactoryProducer {
       if(choice.equalsIgnoreCase("MARCOS")){
          return new MarcosFactory();
          
-      }else if(choice.equalsIgnoreCase("CUADRADO")){
-         return new CuadradoFactory();
+      }else if(choice.equalsIgnoreCase("SQUARE")){
+         return new SquareFactory();
       }
       
       return null;
