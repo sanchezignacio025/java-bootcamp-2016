@@ -1,0 +1,155 @@
+# Host     : localhost
+# Port     : 3306
+# Database : high-school
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+CREATE DATABASE `highschool`
+    CHARACTER SET 'latin1'
+    COLLATE 'latin1_swedish_ci';
+
+#
+# Structure for the `profesor` table : 
+#
+
+CREATE TABLE `profesor` (
+  `id_teacher` int(11) NOT NULL,
+  `firts_name` varchar(20) default NULL,
+  `last_name` varchar(20) default NULL,
+  `birth` date default NULL,
+  PRIMARY KEY  (`id_teacher`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `course` table : 
+#
+
+CREATE TABLE `course` (
+  `id_course` int(11) NOT NULL,
+  `name` varchar(20) default NULL,
+  `id_teacher` int(11) default NULL,
+  `hours` int(11) default NULL,
+  PRIMARY KEY  (`id_course`),
+  KEY `id_teacher` (`id_teacher`),
+  CONSTRAINT `id_teacher` FOREIGN KEY (`id_teacher`) REFERENCES `profesor` (`id_teacher`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `student` table : 
+#
+
+CREATE TABLE `student` (
+  `id_student` int(11) NOT NULL,
+  `first_name` varchar(20) default NULL,
+  `last_name` varchar(20) default NULL,
+  `registration_number` int(11) default NULL,
+  `birth` date default NULL,
+  PRIMARY KEY  (`id_student`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `schedule_time` table : 
+#
+
+CREATE TABLE `schedule_time` (
+  `id_course` int(11) NOT NULL,
+  `day` int(11) NOT NULL,
+  `start_time` int(11) default NULL,
+  `finish_time` int(11) default NULL,
+  PRIMARY KEY  (`id_course`,`day`),
+  KEY `id_course` (`id_course`),
+  KEY `day` (`day`),
+  CONSTRAINT `shedule_time` FOREIGN KEY (`id_course`) REFERENCES `course` (`id_course`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Structure for the `student_course` table : 
+#
+
+CREATE TABLE `student_course` (
+  `id_student` int(11) NOT NULL,
+  `id_course` int(11) NOT NULL,
+  `nota` int(11) default NULL,
+  PRIMARY KEY  (`id_student`,`id_course`),
+  KEY `id_student` (`id_student`),
+  KEY `id_course` (`id_course`),
+  CONSTRAINT `id_course` FOREIGN KEY (`id_course`) REFERENCES `course` (`id_course`),
+  CONSTRAINT `id_student` FOREIGN KEY (`id_student`) REFERENCES `student` (`id_student`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Data for the `profesor` table  (LIMIT 0,500)
+#
+
+INSERT INTO `profesor` (`id_teacher`, `firts_name`, `last_name`, `birth`) VALUES 
+  (1,'Roberto','Sanchez','1970-04-24'),
+  (2,'Ernesto','Pantano','1978-05-30'),
+  (3,'Pablo','Macaro','1980-02-20');
+
+COMMIT;.s
+
+#
+# Data for the `course` table  (LIMIT 0,500)
+#
+
+INSERT INTO `course` (`id_course`, `name`, `id_teacher`, `hours`) VALUES 
+  (1,'Programacion',2,60),
+  (2,'Java',1,50),
+  (3,'Cobol',3,40);
+
+COMMIT;
+
+#
+# Data for the `student` table  (LIMIT 0,500)
+#
+
+INSERT INTO `student` (`id_student`, `first_name`, `last_name`, `registration_number`, `birth`) VALUES 
+  (1,'Pablo','Altamira',1,'1995-05-30'),
+  (2,'Andres','Benitez',2,'1996-08-25'),
+  (3,'Carlos','Alterio',3,'1998-12-14'),
+  (4,'Bruno','Sanfilippo',4,'1998-12-30'),
+  (5,'Jose','Aused',5,'1994-02-14'),
+  (6,'Emanuel','Colombo',6,'1996-12-30'),
+  (7,'Emilio','Sanz',7,'1998-10-10'),
+  (8,'Juan','Blanco',8,'1996-08-04'),
+  (9,'Santiago','Perez',9,'1997-07-07'),
+  (10,'Ruben','Taborda',10,'1993-10-10');
+
+COMMIT;
+
+#
+# Data for the `student_course` table  (LIMIT 0,500)
+#
+
+INSERT INTO `student_course` (`id_student`, `id_course`, `nota`) VALUES 
+  (1,2,3),
+  (2,2,9),
+  (3,1,6),
+  (4,3,10),
+  (5,2,10),
+  (7,3,10),
+  (8,1,4);
+
+COMMIT;
+
+# 3
+
+SELECT last_name, firts_name, schedule_time.day, start_time, finish_time, name
+         
+FROM profesor  INNER JOIN course  on profesor.id_teacher=course.id_teacher
+ INNER JOIN schedule_time  ON schedule_time.id_course=course.id_course
+                        
+ORDER BY schedule_time.day, course.name 
+# 4
+
+Select course.name, (count(student_course.nota)*100)/ count(*) as "porcentaje"
+ from course  inner join student_course  on course.id_course = studentcourse.id_course
+ where student_course.nota > 6
+
+# 5
+Select profesor.firts_name, profesor.last_name, schedule_time.day, schedule_time.start_time, schedule_time.finish_time, course.name 
+
+from profesor inner join course  on profesor.id_teacher = course.id_teacher inner join schedule_time  on course.id_course = schedule_time.id_course
+order by schedule_time.day, course.name
+# u order by 2,4
