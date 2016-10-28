@@ -70,6 +70,9 @@ CREATE TABLE `schedule_time` (
 CREATE TABLE `student_course` (
   `id_student` int(11) NOT NULL,
   `id_course` int(11) NOT NULL,
+  `nota1` int(11) default NULL,
+  `nota2` int(11) default NULL,
+  `nota3` int(11) default NULL,
   `nota` int(11) default NULL,
   PRIMARY KEY  (`id_student`,`id_course`),
   KEY `id_student` (`id_student`),
@@ -122,14 +125,14 @@ COMMIT;
 # Data for the `student_course` table  (LIMIT 0,500)
 #
 
-INSERT INTO `student_course` (`id_student`, `id_course`, `nota`) VALUES 
-  (1,2,3),
-  (2,2,9),
-  (3,1,6),
-  (4,3,10),
-  (5,2,10),
-  (7,3,10),
-  (8,1,4);
+INSERT INTO `student_course` (`id_student`, `id_course`,`nota1`,`nota2`,`nota3`,`nota`) VALUES 
+  (1,2,2,3,3,3),
+  (2,2,4,9,9,9),
+  (3,1,6,6,6,6),
+  (4,3,10,10,10,10),
+  (5,2,10,10,10,10),
+  (7,3,10,10,10,10),
+  (8,1,4,4,4,4);
 
 COMMIT;
 
@@ -141,15 +144,18 @@ FROM profesor  INNER JOIN course  on profesor.id_teacher=course.id_teacher
  INNER JOIN schedule_time  ON schedule_time.id_course=course.id_course
                         
 ORDER BY schedule_time.day, course.name 
+
 # 4
 
-Select course.name, (count(student_course.nota)*100)/ count(*) as "porcentaje"
- from course  inner join student_course  on course.id_course = studentcourse.id_course
- where student_course.nota > 6
+SELECT count(*)/(SELECT count(*) FROM student_course WHERE id_course=1)*100 
+FROM student_course where id_course=1 and nota>=6; 
 
 # 5
+
 Select profesor.firts_name, profesor.last_name, schedule_time.day, schedule_time.start_time, schedule_time.finish_time, course.name 
 
 from profesor inner join course  on profesor.id_teacher = course.id_teacher inner join schedule_time  on course.id_course = schedule_time.id_course
 order by schedule_time.day, course.name
 # u order by 2,4
+
+
