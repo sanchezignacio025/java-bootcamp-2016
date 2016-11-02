@@ -1,0 +1,50 @@
+*/Student:
+
+db.Student.insert({first_name:"Pablo", last_name:"Altamira", registration_number:"1", birth:"1995/05/30"});
+db.Student.insert({first_name:"Andres", last_name:"Benitez", registration_number:"2", birth:"1996/08/25"});
+db.Student.insert({first_name:"Carlos", last_name:"Alterio", registration_number:"3", birth:"1998/12/14"});
+db.Student.insert({first_name:"Bruno", last_name:"Sanfilippo", registration_number:"4", birth:"1998/12/30"});
+db.Student.insert({first_name:"Jose", last_name:"Aused", registration_number:"5", birth:"1994/02/14"});
+db.Student.insert({first_name:"Emanuel", last_name:"Colombo", registration_number:"6", birth:"1996/12/30"});
+db.Student.insert({first_name:"Emilio", last_name:"Sanz", registration_number:"7", birth:"1995/05/30"});
+db.Student.insert({first_name:"Juan", last_name:"Blanco", registration_number:"8", birth:"1996/08/04"});
+db.Student.insert({first_name:"Santiago", last_name:"Perez", registration_number:"9", birth:"1997/07/07"});
+db.Student.insert({first_name:"Ruben", last_name:"Taborda", registration_number:"10", birth:"1993/10/10"});
+
+
+*/Profesor:
+
+db.Profesor.insert({first_name:"Roberto", last_name:"Sanchez", birth:"1970/04/24"});
+db.Profesor.insert({first_name:"Ernesto", last_name:"Pantano", birth:"1978/05/30"});
+db.Profesor.insert({first_name:"Pablo", last_name:"Macaro", birth:"1980/02/20"});
+
+
+*/Course:
+
+db.Course.insert({name:"Programacion", "Student": [ObjectId("58174c909c6209b37692afc5"),ObjectId("58174ceb9c6209b37692afc6")], "profesor":ObjectId("58174c909c6209b37692afc5"), day:"martes", "start_time":"9", "finish_time":"11", day:"jueves", "start_time":"10", "finish_time":"12"});
+db.Course.insert({name:"Java", "Student": [ObjectId("58174d3a9c6209b37692afc7"),ObjectId("581743f49c6209b37692afbb"),ObjectId("5817445d9c6209b37692afbc"),ObjectId("581744f89c6209b37692afbd"),ObjectId("581745e39c6209b37692afbe"),ObjectId("5817470a9c6209b37692afbf")], "Profesor":ObjectId("58174ceb9c6209b37692afc6"), day:"martes", "start_time":"9", "finish_time":"11", day:"jueves", "start_time":"10", "finish_time":"12"});
+db.Course.insert({name:"Cobol", "Student": [ObjectId("581747679c6209b37692afc0"),ObjectId("581748a19c6209b37692afc1"),ObjectId("581748f09c6209b37692afc2"),ObjectId("581749589c6209b37692afc3"), ObjectId("581748f09c6209b37692afc2") ], "Profesor":objectId("58174a079c6209b37692afc4"), day:"martes", "start_time":"9", "finish_time":"11", day:"jueves", "start_time":"10", "finish_time":"12"});
+
+
+*/ Note:
+
+db.Note.insert({ "profesor":ObjectId("58174c909c6209b37692afc5") , "Student": ObjectId("58174c909c6209b37692afc5"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174c909c6209b37692afc5") , "Student": ObjectId("58174ceb9c6209b37692afc6"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174ceb9c6209b37692afc6") , "Student": ObjectId("5817445d9c6209b37692afbc"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174ceb9c6209b37692afc6") , "Student": ObjectId("581744f89c6209b37692afbd"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174ceb9c6209b37692afc6") , "Student": ObjectId("581745e39c6209b37692afbe"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174ceb9c6209b37692afc6") , "Student": ObjectId("5817470a9c6209b37692afbf"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174d3a9c6209b37692afc7") , "Student": ObjectId("581747679c6209b37692afc0"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174d3a9c6209b37692afc7") , "Student": ObjectId("581748a19c6209b37692afc1"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174d3a9c6209b37692afc7") , "Student": ObjectId("581748f09c6209b37692afc2"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174d3a9c6209b37692afc7") , "Student": ObjectId("581749589c6209b37692afc3"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+db.Note.insert({ "profesor":ObjectId("58174d3a9c6209b37692afc7") , "Student": ObjectId("581748f09c6209b37692afc2"), final_note: 9 , first_note: 8 , second_note: 9 , third_note: 10});
+
+
+/*Fetch all students whose notes in a specific course were greater than 4*/
+
+db.Note.count ( { final_note : { $gt: 4} };
+
+/*Fetch all courses ordered by name for a given teacher.*/
+
+db.course.find({ "Profesor":ObjectId("58174c909c6209b37692afc5"}).sort({"Course":ObjectId("5818897d50830f02e15817dd")});
