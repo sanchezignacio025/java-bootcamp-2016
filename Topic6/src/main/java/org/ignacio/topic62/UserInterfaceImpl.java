@@ -8,7 +8,7 @@ package org.ignacio.topic62;
    import org.springframework.web.bind.annotation.RestController;
 	
 	@RestController
-	public class UserInterfaceImplem implements UserInterface {
+	public class UserInterfaceImpl implements UserInterface {
 	
 		ArrayList<User> userList = new ArrayList<User>();
 		

@@ -12,9 +12,9 @@ public class User {
 			}
 			
 			public User(String nickName, String firstName, String lastName){
-				this.setFirstName(firstName);
-				this.setLastName(lastName);
-				this.setNickName(nickName);
+				this.firstName = firstName;
+				this.lastName = lastName;
+				this.nickName = nickName;
 			}
 			
 			public String getFirstName() {
