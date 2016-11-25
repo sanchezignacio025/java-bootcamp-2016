@@ -1,0 +1,36 @@
+USE shoppingcart;
+
+CREATE TABLE user(
+id_user int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+nickName varchar(20) NOT NULL,
+password varchar(20) NOT NULL,
+first_name varchar(20) NOT NULL,
+last_name varchar(20) NOT NULL
+);
+
+
+CREATE TABLE bill(
+id_bill int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_user int NOT NULL,
+state varchar(20) NOT NULL,
+FOREIGN KEY (id_user) REFERENCES user(id_user)
+);
+
+CREATE TABLE article(
+idarticle int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+name varchar(60) NOT NULL,
+category varchar(40) NOT NULL,
+stock int NOT NULL,
+price int NOT NULL
+);
+
+CREATE TABLE billarticle(
+id_bill int NOT NULL,
+idarticle int NOT NULL,
+quantity int NOT NULL,
+FOREIGN KEY (id_bill) REFERENCES cart(id_bill),
+FOREIGN KEY (idarticle) REFERENCES product(idarticle)
+);
+
+
+
